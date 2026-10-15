@@ -96,8 +96,9 @@ export function StorageProvider({ children }) {
     waistCm: data.user.waistCm,
     neckCm: data.user.neckCm,
     steps: data.user.stepsToday,
-    isWorkoutDay: data.user.isWorkoutDay,
-    age: data.user.age
+    isWorkoutDay: data.user.isWorkoutDay !== undefined ? data.user.isWorkoutDay : true,
+    age: data.user.age,
+    deficit: data.user.deficit || 250
   });
 
   // Check if today is Sunday
@@ -115,6 +116,47 @@ export function StorageProvider({ children }) {
       }
       return { ...prev, user: updatedUser };
     });
+  };
+
+  const addWater = (ml = 250) => {
+    setData((prev) => {
+      const current = prev.user.waterMl || 0;
+      const next = Math.max(0, current + ml);
+      return {
+        ...prev,
+        user: { ...prev.user, waterMl: next }
+      };
+    });
+  };
+
+  const toggleHomeHabit = (habitKey) => {
+    setData((prev) => {
+      const habits = prev.user.homeHabits || {};
+      return {
+        ...prev,
+        user: {
+          ...prev.user,
+          homeHabits: {
+            ...habits,
+            [habitKey]: !habits[habitKey]
+          }
+        }
+      };
+    });
+  };
+
+  const setSteps = (steps) => {
+    setData((prev) => ({
+      ...prev,
+      user: { ...prev.user, stepsToday: Math.max(0, steps) }
+    }));
+  };
+
+  const setDeficit = (deficit) => {
+    setData((prev) => ({
+      ...prev,
+      user: { ...prev.user, deficit }
+    }));
   };
 
   const startRestTimer = (seconds = 90, exerciseName = '') => {
@@ -562,6 +604,10 @@ export function StorageProvider({ children }) {
         completeActiveWorkout,
         toggleSundayTask,
         logMeasurement,
+        addWater,
+        toggleHomeHabit,
+        setSteps,
+        setDeficit,
         exportDataJSON,
         importDataJSON,
         resetToInitialData,

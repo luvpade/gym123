@@ -1,19 +1,17 @@
 import React from 'react';
 import {
-  Calendar,
+  Home,
   Dumbbell,
   LineChart,
-  Ruler,
   Settings,
   Sparkles
 } from 'lucide-react';
 import { triggerHaptic } from '../engine/audio';
 
 const TABS = [
-  { id: 'today', label: 'Today', icon: Calendar },
-  { id: 'ppl', label: 'PPL Split', icon: Dumbbell },
-  { id: 'analytics', label: 'Analytics', icon: LineChart },
-  { id: 'measurements', label: 'Measurements', icon: Ruler },
+  { id: 'home', label: 'Home & Fuel', icon: Home },
+  { id: 'workout', label: 'Workout (PPL)', icon: Dumbbell },
+  { id: 'progress', label: 'Progress Vault', icon: LineChart },
   { id: 'settings', label: 'Settings', icon: Settings },
 ];
 
@@ -53,7 +51,7 @@ export default function Navigation({ activeTab, setActiveTab }) {
 
       {/* Mobile Fixed Glassmorphism Bottom Navigation */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 px-3 py-2 bg-obsidian-950/85 backdrop-blur-2xl border-t border-obsidian-800/90 shadow-2xl">
-        <div className="grid grid-cols-5 gap-1 max-w-md mx-auto">
+        <div className="grid grid-cols-4 gap-1 max-w-md mx-auto">
           {TABS.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;

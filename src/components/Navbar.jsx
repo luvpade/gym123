@@ -11,7 +11,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
     <header className="sticky top-0 z-40 w-full glass-card border-b border-obsidian-750/80 px-4 sm:px-8 py-3 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Brand Identity */}
-        <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('today')}>
+        <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('home')}>
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500/20 via-emerald-500/10 to-cyan-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-obsidian-glow">
             <Activity className="w-5 h-5" />
           </div>

@@ -105,16 +105,17 @@ export function calculateTDEE({ bmr, steps = 8000, isWorkoutDay = true }) {
 
 /**
  * Recomposition Caloric Target:
- * Dynamically computed as Target TDEE - 250 kcal (clamped to safe 1,950 - 2,150 kcal range)
+ * Dynamically computed as Target TDEE - 250 kcal (recomp deficit)
+ * Scales dynamically with steps and activity level with a safe metabolic floor (1,750 kcal)
  */
-export function calculateRecompTarget(tdee) {
-  const rawTarget = tdee - 250;
-  const clampedTarget = Math.max(1950, Math.min(2150, Math.round(rawTarget)));
+export function calculateRecompTarget(tdee, deficit = 250) {
+  const rawTarget = tdee - deficit;
+  const target = Math.max(1750, Math.round(rawTarget));
   return {
     rawTarget: Math.round(rawTarget),
-    targetCalories: clampedTarget,
-    isClamped: rawTarget < 1950 || rawTarget > 2150,
-    deficit: 250
+    targetCalories: target,
+    deficit,
+    isProtectedFloor: rawTarget < 1750
   };
 }
 

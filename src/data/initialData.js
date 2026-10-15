@@ -17,6 +17,15 @@ export const INITIAL_SEED_DATA = {
     stepsToday: 9450,
     caloriesToday: 2050,
     proteinToday: 142,
+    waterMl: 2250,
+    deficit: 250,
+    homeHabits: {
+      morningWeighIn: true,
+      waterGoal: false,
+      proteinGoal: true,
+      postureReset: false,
+      sleepGoal: true
+    },
     isWorkoutDay: true,
     streakDays: 18,
     lastActiveDate: '2026-10-15',
